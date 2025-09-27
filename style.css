@@ -1,0 +1,172 @@
+/* ====== Background with green gradient ====== */
+html { height: 100vh; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+
+  background: linear-gradient(135deg, #0f5132, #198754, #28a745, #71dd8a);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* ====== Loading screen ====== */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+  font-size: 20px;
+}
+
+#loading h1.highlight {
+  font-size: 60px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #2ecc71, #27ae60, #16a085, #1abc9c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-emphasis-color: transparent;
+  animation: glow 3s infinite linear;
+  margin-bottom: 10px;
+}
+
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 5px #2ecc71); }
+  50% { filter: drop-shadow(0 0 20px #27ae60); }
+  100% { filter: drop-shadow(0 0 5px #2ecc71); }
+}
+
+/* ====== Main app ====== */
+#app {
+  padding: 20px;
+  min-height: 100vh;
+  color: #fff;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 10px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+header p {
+  margin: 5px 0 0;
+  color: #d1f7d6;
+}
+
+/* Wallet */
+.wallet {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.wallet p {
+  font-weight: bold;
+  background: rgba(255,255,255,0.15);
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #000;
+}
+
+/* Layout */
+main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+  padding: 20px;
+}
+
+.chatbox, .transactions {
+  background: rgba(255,255,255,0.95);
+  color: #333;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.chatbox h2, .transactions h2 {
+  margin-top: 0;
+  color: #198754;
+}
+
+#messages {
+  background: #f9f9f9;
+  min-height: 200px;
+  max-height: 350px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Chat input */
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+/* Transactions list */
+.transactions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.transactions li {
+  background: #e8f8ef;
+  border-left: 5px solid #198754;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #155724;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
