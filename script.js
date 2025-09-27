@@ -1,4 +1,4 @@
-// ===== CHECK ETHEREUM LIBRARY =====
+// ===== CHECK ETHEREUM LIBRARY (if not loaded, alert) =====
 if (typeof ethers === 'undefined') {
   alert("Ethers.js not loaded! Check HTML <script> tag.");
 }
@@ -34,7 +34,7 @@ async function connectWallet() {
   }
 
   try {
-    // Switch to ZenChain
+    // Switch to ZenChain if not already
     const currentChainId = await window.ethereum.request({ method: 'eth_chainId' });
     if (currentChainId !== ZENCHAIN_TESTNET.chainId) {
       try {
@@ -64,7 +64,7 @@ async function connectWallet() {
     alert("Connected to ZenChain Testnet!");
   } catch (error) {
     console.error("Connection failed:", error);
-    alert("Connection failed! Check MetaMask network.");
+    alert("Connection failed! Check MetaMask network and reload page.");
   }
 }
 
@@ -82,7 +82,7 @@ window.addEventListener("load", () => {
 const connectBtn = document.getElementById("connectBtn");
 if (connectBtn) connectBtn.addEventListener("click", connectWallet);
 
-// ===== SEND MESSAGE با GAS TX + REAL AI (سفارشی) =====
+// ===== SEND MESSAGE با GAS TX =====
 async function sendMessage() {
   const input = document.getElementById("messageInput");
   const messages = document.getElementById("messages");
@@ -123,56 +123,22 @@ async function sendMessage() {
     txItem.textContent = `Message sent - Tx: ${tx.hash.slice(0,10)}... | Gas: ${receipt.gasUsed}`;
     txList.appendChild(txItem);
 
-    // ===== REAL AI REPLY (سفارشی: سلام = Hi from ZenChain, say about zenchain = توضیح پروژه) =====
-    console.log("Calling AI for: " + text);
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer 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',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [
-          { role: 'system', content: 'You are ZenChain Agent, a blockchain AI. If the user says "سلام" or "hi", reply "Hi from ZenChain!". If the user asks "say about zenchain", explain: "ZenChain is a Bitcoin Layer 1 blockchain with ZTC token for gas and staking. It supports smart contracts and DeFi on Bitcoin.". For other messages, answer concisely in English about crypto/ZenChain topics.' },
-          { role: 'user', content: text }
-        ],
-        max_tokens: 100,
-        temperature: 0.7
-      })
-    });
-
-    console.log("AI status:", response.status);
-
-    if (response.status === 429) {
-      // Rate limit - fake
+    // AI reply
+    setTimeout(() => {
       const replyMsg = document.createElement("div");
       replyMsg.className = "msg bot";
-      replyMsg.textContent = "AI: Hi from ZenChain!";
+      replyMsg.textContent = "AI: Message sent on ZenChain! Tx confirmed.";
       messages.appendChild(replyMsg);
       messages.scrollTop = messages.scrollHeight;
-    } else if (!response.ok) {
-      throw new Error('API error: ' + response.status);
-    } else {
-      const data = await response.json();
-      const aiReply = data.choices[0].message.content;
-
-      // Add AI reply
-      const replyMsg = document.createElement("div");
-      replyMsg.className = "msg bot";
-      replyMsg.textContent = "AI: " + aiReply;
-      messages.appendChild(replyMsg);
-      messages.scrollTop = messages.scrollHeight;
-    }
+    }, 1000);
 
   } catch (error) {
-    console.error("AI error:", error);
+    console.error("Tx error:", error);
     const errorMsg = document.createElement("div");
     errorMsg.className = "msg bot";
-    errorMsg.textContent = "AI: Sorry, error. Try again.";
+    errorMsg.textContent = "Error: Tx failed. Check ZTC/gas.";
     errorMsg.style.color = "red";
     messages.appendChild(errorMsg);
-    messages.scrollTop = messages.scrollHeight;
   } finally {
     input.disabled = false;
     sendBtn.disabled = false;
@@ -188,4 +154,4 @@ if (sendBtn) sendBtn.addEventListener("click", sendMessage);
 const input = document.getElementById("messageInput");
 if (input) input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") sendMessage();
-})
+});
