@@ -123,11 +123,15 @@ async function sendMessage() {
     txItem.textContent = `Message sent - Tx: ${tx.hash.slice(0,10)}... | Gas: ${receipt.gasUsed}`;
     txList.appendChild(txItem);
 
-    // AI reply
+    // AI reply (سفارشی: اگر hi باشه، Hi from zenchain!)
     setTimeout(() => {
       const replyMsg = document.createElement("div");
       replyMsg.className = "msg bot";
-      replyMsg.textContent = "AI: Message sent on ZenChain! Tx confirmed.";
+      let reply = "AI: Message sent on ZenChain! Tx confirmed.";
+      if (text.toLowerCase().includes('hi') || text.toLowerCase().includes('سلام')) {
+        reply = "AI: Hi from zenchain!";
+      }
+      replyMsg.textContent = reply;
       messages.appendChild(replyMsg);
       messages.scrollTop = messages.scrollHeight;
     }, 1000);
