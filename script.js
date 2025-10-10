@@ -177,4 +177,3 @@ async function flipCoin() {
 }
 
 document.getElementById("flipBtn").addEventListener("click", flipCoin);
-
