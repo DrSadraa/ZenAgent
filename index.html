@@ -1,52 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZenChain Agent</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenChain Agent</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Loading screen -->
-  <div id="loading">
-    <h1 class="highlight">ZENCHAIN</h1>
-    <p>Loading...</p>
-  </div>
-
-  <!-- Main app -->
-  <div id="app" style="display: none;">
-    <header>
-      <h1>ZenChain Agent</h1>
-      <p>Blockchain-powered AI Assistant</p>
-      <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" type="text/javascript"></script>
-    </header>
-
-<!-- Wallet and Balance -->
-<section class="wallet">
-  <button id="connectBtn">Connect Wallet</button>
- 
-</section>
-
-<main>
-  <!-- Chatbox -->
-  <section class="chatbox">
-    <h2>AI Chat</h2>
-    <div id="messages"></div>
-    <div class="chat-input">
-      <input type="text" id="messageInput" placeholder="Type your message...">
-      <button id="sendBtn">Send</button>
+    <!-- Loading screen -->
+    <div id="loading">
+        <h1 class="highlight">ZENCHAIN</h1>
+        <div class="spinner"></div>
+        <p>Loading...</p>
     </div>
-  </section>
 
-  <!-- Transactions -->
-  <section class="transactions">
-    <h2>Transactions</h2>
-    <ul id="txList"></ul>
-  </section>
-</main>  </div>
+    <!-- Main app -->
+    <div id="app" style="display: none;">
+        <header>
+            <h1><i class="fas fa-link"></i> ZenChain Agent</h1>
+            <p>Blockchain-powered AI Assistant</p>
+            <button id="darkToggle"><i class="fas fa-moon"></i></button>
+        </header>
 
-  <!-- External JS -->
-  <script src="script.js"></script>
+        <!-- Layout -->
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <section class="wallet">
+                    <h3><i class="fas fa-wallet"></i> Wallet</h3>
+                    <button id="connectBtn" data-tooltip="Click to connect MetaMask">Connect Wallet</button>
+                    <div class="tooltip">Click to connect MetaMask</div>
+                </section>
+
+                <section class="transactions">
+                    <h3><i class="fas fa-exchange-alt"></i> Transactions</h3>
+                    <ul id="txList"></ul>
+                </section>
+            </aside>
+
+            <!-- Chat main -->
+            <main class="chat-main">
+                <section class="chatbox">
+                    <h2><i class="fas fa-comments"></i> AI Chat</h2>
+                    <div id="messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Type your message...">
+                        <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Coin aside -->
+            <aside class="coin-aside">
+                <section class="coin-flip">
+                    <h2><i class="fas fa-coins"></i> Coin Flip</h2>
+                    <div class="coin-panel">
+                        <div class="particles"></div>
+                        <div class="coin-container">
+                            <div id="coinAnimation" class="coin-3d">
+                                <div class="side front">Heads</div>
+                                <div class="side back">Tails</div>
+                            </div>
+                        </div>
+                        <button id="flipBtn"><i class="fas fa-sync-alt"></i> Flip</button>
+                        <p id="flipResult">Spinning...</p>
+                        <p id="score">Wins: 0</p>
+                        <button id="shareBtn" style="display: none;"><i class="fas fa-share"></i> Share Result</button>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+
+    <!-- External JS -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
 
