@@ -16,7 +16,7 @@ document.getElementById('darkToggle').addEventListener('click', () => {
 if (typeof ethers === 'undefined') alert("Ethers.js not loaded!");
 
 const ZENCHAIN_TESTNET = {
-  chainId: '0x20d8',8408
+  chainId: '0x20d8',
   chainName: 'ZenChain Testnet',
   nativeCurrency: { name: 'ZTC', symbol: 'ZTC', decimals: 18 },
   rpcUrls: ['https://rpc.zenchain.io'],
@@ -177,3 +177,4 @@ async function flipCoin() {
 }
 
 document.getElementById("flipBtn").addEventListener("click", flipCoin);
+
